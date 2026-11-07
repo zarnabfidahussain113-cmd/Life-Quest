@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeQuest</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1020;
+  color: white;
+}
+header {
+  padding: 25px 20px;
+  background: #151b35;
+  border-bottom: 1px solid #333b5e;
+}
+h1 { margin: 0; color: #a78bfa; }
+main { max-width: 700px; margin: auto; padding: 20px; }
+.card {
+  background: #171e38;
+  padding: 20px;
+  border-radius: 16px;
+  margin: 15px 0;
+  border: 1px solid #303957;
+}
+.stats {
+  display: flex;
+  gap: 12px;
+}
+.stats .card { flex: 1; text-align: center; }
+.number { font-size: 28px; color: #a78bfa; font-weight: bold; }
+button {
+  background: #8055e8;
+  border: 0;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover { background: #9b79f5; }
+.mission {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+small { color: #b6bfd7; }
+</style>
+</head>
+<body>
+<header>
+  <h1>⚡ LifeQuest</h1>
+  <p>Your life. Your missions. Your next level.</p>
+</header>
+
+<main>
+  <h2>Welcome, Champion! 👋</h2>
+  <div class="stats">
+    <div class="card">
+      <small>YOUR XP</small>
+      <div class="number" id="xp">0</div>
+    </div>
+    <div class="card">
+      <small>YOUR LEVEL</small>
+      <div class="number" id="level">1</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 Daily Missions</h2>
+    <div class="mission">
+      <div>
+        <strong>Read for 10 minutes</strong><br>
+        <small>Reward: 20 XP</small>
+      </div>
+      <button onclick="completeMission(this,20)">Complete</button>
+    </div>
+    <hr>
+    <div class="mission">
+      <div>
+        <strong>Drink some water</strong><br>
+        <small>Reward: 10 XP</small>
+      </div>
+      <button onclick="completeMission(this,10)">Complete</button>
+    </div>
+    <hr>
+    <div class="mission">
+      <div>
+        <strong>Exercise for 15 minutes</strong><br>
+        <small>Reward: 30 XP</small>
+      </div>
+      <button onclick="completeMission(this,30)">Complete</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🏆 Your Progress</h2>
+    <p>Complete missions to earn XP and level up!</p>
+    <p id="message">Your adventure starts today.</p>
+  </div>
+</main>
+
+<script>
+let xp = 0;
+
+function completeMission(button, points) {
+  if (button.disabled) return;
+  xp += points;
+  button.disabled = true;
+  button.textContent = "Completed ✓";
+  document.getElementById("xp").textContent = xp;
+  const level = Math.floor(xp / 100) + 1;
+  document.getElementById("level").textContent = level;
+  document.getElementById("message").textContent =
+    "Amazing! You earned " + points + " XP!";
+}
